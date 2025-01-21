@@ -7,6 +7,7 @@ use App\Http\Resources\SimpleWalletResource;
 use App\Http\Resources\WalletResource;
 use App\Models\Wallet;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class WalletController extends Controller
 {
@@ -59,7 +60,8 @@ class WalletController extends Controller
      */
     public function destroy(Wallet $wallet)
     {
-        $this->authorize('delete', $wallet);
+        // $this->authorize('delete', $wallet);
+        Gate::authorize('delete', $wallet);
 
         $wallet->delete();
 
