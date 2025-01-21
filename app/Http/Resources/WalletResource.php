@@ -20,8 +20,11 @@ class WalletResource extends JsonResource
             'wallet_type' => new WalletTypeResource($this->walletType),
             'name' => $this->name,
             'balance' => $this->balance,
+            'wallet_address' => $this->wallet_address,
+            // 'transactions' => TransactionResource::collection($this->transactions),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+
         ];
     }
 }

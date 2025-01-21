@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('wallet_address', 11)->unique();
             $table->timestamps();
     
-            $table->unique(['user_id', 'name']); // Name must be unique for each user
+            // $table->unique(['user_id', 'name']); // Name must be unique for each user
         });
     }
 
