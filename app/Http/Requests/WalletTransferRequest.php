@@ -22,8 +22,8 @@ class WalletTransferRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sender_wallet_id' => ['required', 'exists:wallets,id'],
-            'receiver_wallet_id' => ['required', 'exists:wallets,id', 'different:sender_wallet_id'],
+            'sender_wallet_address' => ['required', 'string', 'exists:wallets,wallet_address'],
+            'receiver_wallet_address' => ['required', 'string', 'exists:wallets,wallet_address', 'different:sender_wallet_address'],
             'amount' => ['required', 'numeric', 'min:0.01'],
         ];
     }

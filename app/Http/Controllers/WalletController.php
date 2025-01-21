@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreWalletRequest;
+use App\Http\Resources\SimpleWalletResource;
 use App\Http\Resources\WalletResource;
 use App\Models\Wallet;
 use Illuminate\Http\Response;
@@ -14,7 +15,7 @@ class WalletController extends Controller
      */
     public function index()
     {
-        $wallets =  Wallet::with('user', 'walletType')->get();
+        $wallets = Wallet::with('user', 'walletType')->get();
 
         return response()->json([
             'data' => WalletResource::collection($wallets),
@@ -29,18 +30,19 @@ class WalletController extends Controller
     {
         $validated = $request->validated();
 
+        // Create a wallet with auto-generated wallet_address
         $wallet = Wallet::create($validated);
 
-        $wallet->load(['user', 'walletType']);
+        $wallet->load('walletType');
 
         return response()->json([
-            'data' => new WalletResource($wallet),
+            'data' => new SimpleWalletResource($wallet),
             'message' => 'Wallet created successfully',
         ], Response::HTTP_CREATED);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified wallet.
      */
     public function show(Wallet $wallet)
     {

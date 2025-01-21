@@ -14,15 +14,16 @@ class TransactionController extends Controller
     {
         $validated = $request->validated();
 
-        $senderWallet = Wallet::findOrFail($validated->sender_wallet_id);
-        $receiverWallet = Wallet::findOrFail($validated->receiver_wallet_id);
-        $amount = $validated->amount;
+        // Find the sender and receiver wallets using their wallet_address
+        $senderWallet = Wallet::with('walletType')->where('wallet_address', $validated['sender_wallet_address'])->firstOrFail();
+        $receiverWallet = Wallet::with('walletType')->where('wallet_address', $validated['receiver_wallet_address'])->firstOrFail();
+        $amount = $validated['amount'];
 
+        // Check if the sender has sufficient balance
         if ($senderWallet->balance < $amount) {
             return response()->json([
-                    'message' => 'Insufficient balance',
-                ], Response::HTTP_BAD_REQUEST
-            );
+                'message' => 'Insufficient balance',
+            ], Response::HTTP_BAD_REQUEST);
         }
 
         // Update balances
@@ -38,9 +39,6 @@ class TransactionController extends Controller
             'receiver_wallet_id' => $receiverWallet->id,
             'amount' => $amount,
         ]);
-
-        // Eager load senderWallet and receiverWallet relationships
-        $transaction->load(['senderWallet.user', 'receiverWallet.user']);
 
         return response()->json([
             'data' => new TransactionResource($transaction),

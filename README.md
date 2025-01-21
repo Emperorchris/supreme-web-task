@@ -65,54 +65,40 @@ All routes are prefixed with /api/v1.
             "id": 1,
             "sender_wallet": {
                 "id": 1,
-                "user": {
-                    "id": 1,
-                    "username": "john_doe",
-                    "email": "john@example.com",
-                    "created_at": "2025-01-21T00:00:00Z",
-                    "updated_at": "2025-01-21T00:00:00Z"
-                },
                 "wallet_type": {
                     "id": 1,
-                    "name": "Standard",
-                    "minimum_balance": 100,
-                    "monthly_interest_rate": 2.5,
-                    "created_at": "2025-01-01T00:00:00Z",
-                    "updated_at": "2025-01-01T00:00:00Z"
+                    "name": "Savings",
+                    "minimum_balance": "100.00",
+                    "monthly_interest_rate": "1.5",
+                    "created_at": "2025-01-01T12:00:00.000000Z",
+                    "updated_at": "2025-01-15T12:00:00.000000Z"
                 },
-                "name": "John's Wallet",
-                "balance": 1000,
-                "created_at": "2025-01-01T00:00:00Z",
-                "updated_at": "2025-01-21T00:00:00Z"
+                "name": "John Doe Wallet",
+                "balance": "900.00",
+                "created_at": "2025-01-01T12:00:00.000000Z",
+                "updated_at": "2025-01-21T12:00:00.000000Z"
             },
             "receiver_wallet": {
                 "id": 2,
-                "user": {
-                    "id": 2,
-                    "username": "jane_smith",
-                    "email": "jane@example.com",
-                    "created_at": "2025-01-21T00:00:00Z",
-                    "updated_at": "2025-01-21T00:00:00Z"
-                },
                 "wallet_type": {
                     "id": 1,
-                    "name": "Standard",
-                    "minimum_balance": 100,
-                    "monthly_interest_rate": 2.5,
-                    "created_at": "2025-01-01T00:00:00Z",
-                    "updated_at": "2025-01-01T00:00:00Z"
+                    "name": "Savings",
+                    "minimum_balance": "100.00",
+                    "monthly_interest_rate": "1.5",
+                    "created_at": "2025-01-01T12:00:00.000000Z",
+                    "updated_at": "2025-01-15T12:00:00.000000Z"
                 },
-                "name": "Jane's Wallet",
-                "balance": 1500,
-                "created_at": "2025-01-01T00:00:00Z",
-                "updated_at": "2025-01-21T00:00:00Z"
+                "name": "Jane Doe Wallet",
+                "balance": "1100.00",
+                "created_at": "2025-01-01T12:00:00.000000Z",
+                "updated_at": "2025-01-21T12:00:00.000000Z"
             },
-            "amount": 500,
-            "created_at": "2025-01-21T00:00:00Z",
-            "updated_at": "2025-01-21T00:00:00Z"
+            "amount": "100.00",
+            "created_at": "2025-01-21T12:00:00.000000Z",
+            "updated_at": "2025-01-21T12:00:00.000000Z"
         },
         "message": "Transfer successful"
-    }   
+    }
     ```
 
 ### Wallet Types
