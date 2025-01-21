@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreWalletRequest;
 use App\Http\Resources\WalletResource;
 use App\Models\Wallet;
 use Illuminate\Http\Response;
@@ -22,6 +23,23 @@ class WalletController extends Controller
     }
 
     /**
+     * Store a newly created wallet in storage.
+     */
+    public function store(StoreWalletRequest $request)
+    {
+        $validated = $request->validated();
+
+        $wallet = Wallet::create($validated);
+
+        $wallet->load(['user', 'walletType']);
+
+        return response()->json([
+            'data' => new WalletResource($wallet),
+            'message' => 'Wallet created successfully',
+        ], Response::HTTP_CREATED);
+    }
+
+    /**
      * Display the specified resource.
      */
     public function show(Wallet $wallet)
@@ -31,6 +49,20 @@ class WalletController extends Controller
         return response()->json([
             'data' => new WalletResource($wallet),
             'message' => 'Wallet retrieved successfully',
+        ], Response::HTTP_OK);
+    }
+
+    /**
+     * Remove the specified wallet from storage.
+     */
+    public function destroy(Wallet $wallet)
+    {
+        $this->authorize('delete', $wallet);
+
+        $wallet->delete();
+
+        return response()->json([
+            'message' => 'Wallet deleted successfully',
         ], Response::HTTP_OK);
     }
 }

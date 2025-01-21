@@ -20,7 +20,7 @@ Route::prefix('v1')->group(function () {
     
     Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('users', UserController::class)->except('store');
-        Route::apiResource('wallets', WalletController::class)->only(['index', 'show']);
+        Route::apiResource('wallets', WalletController::class)->except('update');
         Route::post('/wallets/transfer', [TransactionController::class, 'transfer'])->name('wallet.transfer');
         Route::apiResource('wallet_type', WalletTypeController::class)->only(['store', 'destroy']);
     });

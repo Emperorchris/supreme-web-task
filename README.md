@@ -49,10 +49,14 @@ All routes are prefixed with /api/v1.
 ### Users
 - Get All Users: `GET /api/v1/users`
 - Get User Details: `GET /api/v1/users/{id}`
+- Update User: `PUT /api/v1/users/{id}`
+- Delete User: `DELETE /api/v1/users/{id}`
 
 ### Wallets
 - Get All Wallets: `GET /api/v1/wallets`
 - Get Wallet Details: `GET /api/v1/wallets/{id}`
+- Create Wallet: `POST /api/v1/wallets`
+- Delete Wallet: `DELETE /api/v1/wallets/{id}`
 - Transfer Money: `POST /api/v1/wallets/transfer`
 - Payload:
     ```json
@@ -114,3 +118,8 @@ All routes are prefixed with /api/v1.
 ### Wallet Types
 - Create Wallet Type: `POST /api/v1/wallet_type`
 - Delete Wallet Type: `DELETE /api/v1/wallet_type/{id}`
+
+### Policy-Based Authorization
+The application uses Laravel Policies to enforce rules. Key policies implemented:
+- **Wallet**
+  - Only the creator of a wallet can delete it.
